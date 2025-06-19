@@ -6,7 +6,6 @@ from collections import defaultdict
 from openai import OpenAI
 import os
 import subprocess
-import cv2
 import streamlit as st
 import speech_recognition as sr
 
