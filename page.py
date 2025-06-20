@@ -19,7 +19,6 @@ def main():
             with st.spinner("Breaking Segments", show_time=True):
                 segments = wsp.break_segments(transcript, 30)
             st.write(f"✅ Broken Transcript")
-            wsp.delete_frames("frames")
             with st.spinner("Extracting Images", show_time=True):
                 wsp.extract_images(filepath, "frames", 30)
             st.write(f"✅ Extracted Images")
@@ -31,6 +30,8 @@ def main():
             for ts in common_keys:
                 merged.append(f"Caption: {captions[ts]}\nTranscript: {segments[ts]}")
             st.write(wsp.chat_with_gpt(merged))
+            wsp.delete_resources("frames")
+
 
 
 if __name__ == "__main__":
