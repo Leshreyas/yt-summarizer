@@ -23,7 +23,7 @@ def load_blip_model():
 
 @st.cache_resource
 def load_whisper_model():
-    return whisper.load_model("tiny")
+    return whisper.load_model("base")
 
 
 def chat_with_gpt(dataset):
@@ -101,7 +101,7 @@ def extract_images(video_path, output_folder, every_seconds=10):
     subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
-def delete_frames(folder_path, extensions=(".jpg", ".png")):
+def delete_resources(folder_path, extensions=(".jpg", ".png")):
     """
     Deletes all image files in the given folder.
 
@@ -120,6 +120,10 @@ def delete_frames(folder_path, extensions=(".jpg", ".png")):
             os.remove(filepath)
             deleted += 1
     print(f"Deleted {deleted} frame(s) from '{folder_path}'.")
+
+    for filename in os.listdir("audio&video"):
+        filepath = os.path.join("audio&video", filename)
+        os.remove(filepath)
 
 
 def generate_transcript(filepath):
@@ -183,6 +187,8 @@ def download_video(link):
 
     os.remove(raw_path)
     return final_path
+
+
 
 
 def main():
