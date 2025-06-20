@@ -195,7 +195,7 @@ def main():
     filepath = download_video("https://www.youtube.com/watch?v=o8YBp9APnIw")
     transcript = generate_transcript(filepath)
     segments = break_segments(transcript, 30)
-    delete_frames("frames")
+    # delete_frames("frames")
     extract_images("audio&video/paradox_fixed.mp4", "frames", 30)
     captions = process_frames("frames", 30)
     merged = []
