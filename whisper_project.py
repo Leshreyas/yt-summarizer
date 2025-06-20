@@ -101,7 +101,7 @@ def extract_images(video_path, output_folder, every_seconds=10):
     subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
-def delete_resources(folder_path, extensions=(".jpg", ".png")):
+def delete_resources(extensions=(".jpg", ".png")):
     """
     Deletes all image files in the given folder.
 
@@ -109,6 +109,7 @@ def delete_resources(folder_path, extensions=(".jpg", ".png")):
         folder_path (str): Path to the folder containing frames.
         extensions (tuple): File extensions to delete (default: .jpg, .png)
     """
+    folder_path = "frames"
     if not os.path.exists(folder_path):
         print("Folder does not exist.")
         return
@@ -122,8 +123,9 @@ def delete_resources(folder_path, extensions=(".jpg", ".png")):
     print(f"Deleted {deleted} frame(s) from '{folder_path}'.")
 
     for filename in os.listdir("audio&video"):
-        filepath = os.path.join("audio&video", filename)
-        os.remove(filepath)
+        if filename.endswith(".mp4"):
+            filepath = os.path.join("audio&video", filename)
+            os.remove(filepath)
 
 
 def generate_transcript(filepath):

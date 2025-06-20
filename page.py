@@ -30,8 +30,7 @@ def main():
             for ts in common_keys:
                 merged.append(f"Caption: {captions[ts]}\nTranscript: {segments[ts]}")
             st.write(wsp.chat_with_gpt(merged))
-            wsp.delete_resources("frames")
-
+            wsp.delete_resources()
 
 
 if __name__ == "__main__":
