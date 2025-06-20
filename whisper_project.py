@@ -15,7 +15,7 @@ client = OpenAI(api_key="sk-or-v1-6694c59ab95ec74bf8f443a014b168d6d26dbdffa6d49a
 
 @st.cache_resource
 def load_blip_model():
-    processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base", use_fast=True)  # loads the pre-trained processor
+    processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base")  # loads the pre-trained processor
     model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-base")  # loads the model
     model.eval()
     return processor, model
@@ -187,8 +187,6 @@ def download_video(link):
 
     os.remove(raw_path)
     return final_path
-
-
 
 
 def main():
