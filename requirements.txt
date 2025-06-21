@@ -6,5 +6,4 @@ transformers
 openai
 streamlit
 speechrecognition
-ffmpeg
 yt-dlp
