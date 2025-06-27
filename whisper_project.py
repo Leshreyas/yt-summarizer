@@ -43,7 +43,7 @@ Audience: Aspiring AI professionals or tech learners
 Here’s the video transcript and captions:\n\n'''
     prompt += "\n\n".join(dataset)
     response = client.chat.completions.create(
-        model="meta-llama/llama-3.3-8b-instruct:free",
+        model="meta-llama/llama-4-maverick:free",
         messages=[{"role": "user", "content": prompt}]
     )
     prompt += '''Dont mention any discrepencies in the transcript or the captions but if there are issues, choose whichever
