@@ -7,3 +7,4 @@ openai
 streamlit
 speechrecognition
 yt-dlp
+fastapi[all]
