@@ -1,2 +1,3 @@
 audio&video/*.mp4
 audio&video/*.wav
+.env

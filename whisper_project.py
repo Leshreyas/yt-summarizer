@@ -7,10 +7,12 @@ from openai import OpenAI
 import os
 import subprocess
 import streamlit as st
+from dotenv import load_dotenv
 import speech_recognition as sr
 
+load_dotenv()
 # api-key from open router
-client = OpenAI(api_key="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", base_url="https://openrouter.ai/api/v1")
+client = OpenAI(api_key=os.getenv("API_KEY"), base_url="https://openrouter.ai/api/v1")
 
 
 @st.cache_resource
