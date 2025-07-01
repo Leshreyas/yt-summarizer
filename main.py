@@ -1,7 +1,9 @@
+import os
 from typing import Union
 from fastapi import FastAPI
 from pydantic import BaseModel
 import whisper_project as wsp
+import uvicorn
 import subprocess
 
 
@@ -106,8 +108,8 @@ async def handle_http(scope, receive, send):
 
 
 def main():
-    process = ["uvicorn", "main:app", "--host", "0.0.0.0" ,"--port", "80"]
-    subprocess.run(process, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    port = int(os.getenv("PORT"))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
 
 
 if __name__ == "__main__":
