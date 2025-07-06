@@ -1,9 +1,10 @@
 import os
 from typing import Union
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile
 from pydantic import BaseModel
 import whisper_project as wsp
 import uvicorn
+import shutil
 import subprocess
 
 
@@ -23,12 +24,18 @@ def read_root():
     return {"Hello": "World"}
 
 
-@app.get("/summarize/link")
-def summarize_video(link: str):
-    if link:
-        filepath = wsp.download_video(link)
+@app.post("/summarize/file")
+def summarize_video(file: UploadFile):
+    print("hello")
+    if file:
+        folder = "audio&video"
+        os.makedirs(folder, exist_ok=True)
+        filename = "audio" + str(len(os.listdir(folder))) + ".mp4"
+        filepath = os.path.join(folder, filename)
+        print("test")
+        with open(filepath, "wb") as buffer:      # wb -> write, binary mode (necessary for .mp4 files)
+            buffer.write(file.file.read())     # file.file is the file-object from FastAPI
         if filepath:
-            print("test")
             transcript = wsp.generate_transcript(filepath)
             segments = wsp.break_segments(transcript, 30)
             wsp.extract_images(filepath, "frames", 30)

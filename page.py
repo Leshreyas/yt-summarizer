@@ -6,11 +6,14 @@ import whisper_project as wsp
 def main():
     st.title("Youtube Video Summarizer")
     st.write("Get YouTube transcript and use AI to summarize YouTube videos in one click for free.")
-    link = st.text_input(label="Enter the video link:")
-    if link:
+    # link = st.text_input(label="Enter the video link:")
+    file = st.file_uploader("Upload an mp4 file", type="mp4", accept_multiple_files=False, key=None, help=None, on_change=None, args=None,
+                            kwargs=None, disabled=False, label_visibility="visible")
+    if file:
         with st.spinner("Processing in backend", show_time=True):
             try:
-                res = requests.get("http://localhost:8000/summarize/link", params={"link": link})
+                files = {"file": (file.name, file.getvalue(), file.type)}
+                res = requests.post("https://fffc-35-230-62-98.ngrok-free.app/summarize/file", files=files)
                 if res.status_code == 200:
                     st.success("Request sent successfully!")
                     st.write(res.json().get("chat"))
@@ -42,7 +45,7 @@ def main():
         #     for ts in common_keys:
         #         merged.append(f"Caption: {captions[ts]}\nTranscript: {segments[ts]}")
         #     st.write(wsp.chat_with_gpt(merged))
-        #     wsp.delete_resources()
+            wsp.delete_resources()
 
 
 if __name__ == "__main__":

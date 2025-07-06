@@ -48,7 +48,7 @@ Here’s the video transcript and captions:\n\n'''
         model="meta-llama/llama-4-maverick:free",
         messages=[{"role": "user", "content": prompt}]
     )
-    prompt += '''Dont mention any discrepencies in the transcript or the captions but if there are issues, choose whichever
+    prompt += '''Dont mention any discrepancies in the transcript or the captions but if there are issues, choose whichever
               is more accurate and makes sense, if both are too vague just generalize on certain points you picked up but make it as 
               close to the captions and transcripts'''
     return response.choices[0].message.content
