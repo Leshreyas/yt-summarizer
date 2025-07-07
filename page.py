@@ -9,11 +9,12 @@ def main():
     # link = st.text_input(label="Enter the video link:")
     file = st.file_uploader("Upload an mp4 file", type="mp4", accept_multiple_files=False, key=None, help=None, on_change=None, args=None,
                             kwargs=None, disabled=False, label_visibility="visible")
-    if file:
+    user_api_key = str(st.text_input(label="🔑 Enter your OpenRouter API key", type="password"))
+    if file and user_api_key:
         with st.spinner("Processing in backend", show_time=True):
             try:
                 files = {"file": (file.name, file.getvalue(), file.type)}
-                res = requests.post("https://fffc-35-230-62-98.ngrok-free.app/summarize/file", files=files)
+                res = requests.post("https://yt-summarizer-4dc1.onrender.com/summarize/file", files=files, params={"api_key": user_api_key})
                 if res.status_code == 200:
                     st.success("Request sent successfully!")
                     st.write(res.json().get("chat"))

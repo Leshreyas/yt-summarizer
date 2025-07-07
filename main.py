@@ -25,7 +25,7 @@ def read_root():
 
 
 @app.post("/summarize/file")
-def summarize_video(file: UploadFile):
+def summarize_video(file: UploadFile, api_key: str):
     print("hello")
     if file:
         folder = "audio&video"
@@ -44,7 +44,7 @@ def summarize_video(file: UploadFile):
             common_keys = sorted(set(captions.keys()) & set(segments.keys()))
             for ts in common_keys:
                 merged.append(f"Caption: {captions[ts]}\nTranscript: {segments[ts]}")
-            chat = wsp.chat_with_gpt(merged)
+            chat = wsp.chat_with_gpt(merged, api_key)
             wsp.delete_resources()
             return {"chat": chat}
 

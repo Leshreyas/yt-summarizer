@@ -12,7 +12,7 @@ import speech_recognition as sr
 
 load_dotenv()
 # api-key from open router
-client = OpenAI(api_key=os.getenv("API_KEY"), base_url="https://openrouter.ai/api/v1")
+# client = OpenAI(api_key=os.getenv("API_KEY"), base_url="https://openrouter.ai/api/v1")
 
 
 @st.cache_resource
@@ -28,7 +28,9 @@ def load_whisper_model():
     return whisper.load_model("base")
 
 
-def chat_with_gpt(dataset):
+def chat_with_gpt(dataset, key):
+    client = OpenAI(api_key=key, base_url="https://openrouter.ai/api/v1")
+
     print("Generating response")
     prompt = '''Summarize this video transcript in a detailed and structured way. Include the following sections:
 1.	Summary – a high-level overview in a narrative format, around 150–200 words.
