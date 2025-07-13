@@ -14,7 +14,7 @@ def main():
         with st.spinner("Processing in backend", show_time=True):
             try:
                 files = {"file": (file.name, file.getvalue(), file.type)}
-                res = requests.post("https://yt-summarizer-4dc1.onrender.com/summarize/file", files=files, params={"api_key": user_api_key}, timeout=120)
+                res = requests.post("https://yt-summarizer-4dc1.onrender.com/summarize/file", files=files, params={"api_key": user_api_key})
                 if res.status_code == 200:
                     st.success("Request sent successfully!")
                     st.write(res.json().get("chat"))
